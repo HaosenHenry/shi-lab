@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shi Lab — Structural Biology @ Westlake University | 史竹兵实验室</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #c8922b;
+    --light: #f7f5f0;
+    --white: #ffffff;
+    --text: #2c3e50;
+    --text-light: #5a6c7d;
+    --border: #e8e3da;
+    --shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    color: var(--text); background: var(--white); line-height: 1.7;
+  }
+  a { text-decoration: none; color: var(--primary); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navbar */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 14px 0;
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  nav .logo { font-size: 1.3rem; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+  nav .logo span { color: var(--accent); }
+  nav .links { display: flex; gap: 28px; list-style: none; }
+  nav .links a { font-size: 0.9rem; font-weight: 500; color: var(--text-light); transition: color 0.2s; }
+  nav .links a:hover { color: var(--primary); }
+
+  /* Hero */
+  .hero {
+    margin-top: 60px; padding: 100px 0 80px;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a5276 40%, #1a3a5c 100%);
+    color: var(--white); text-align: center;
+  }
+  .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+  .hero .sub { font-size: 1.15rem; opacity: 0.85; font-weight: 400; margin-bottom: 6px; }
+  .hero .inst { font-size: 0.95rem; opacity: 0.65; margin-top: 12px; }
+
+  /* Section */
+  section { padding: 80px 0; }
+  section:nth-child(even) { background: var(--light); }
+  .section-title {
+    font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 12px;
+    color: var(--primary); letter-spacing: -0.5px;
+  }
+  .section-sub { text-align: center; color: var(--text-light); margin-bottom: 50px; font-size: 1rem; }
+
+  /* PI Section */
+  .pi-grid { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
+  .pi-photo {
+    flex-shrink: 0; width: 260px; height: 320px; border-radius: 8px;
+    background: var(--border); overflow: hidden; box-shadow: var(--shadow);
+  }
+  .pi-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .pi-info { flex: 1; min-width: 300px; }
+  .pi-info h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+  .pi-info .title-zh { font-size: 1rem; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .pi-info .title-en { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; }
+  .pi-info .bio { font-size: 0.95rem; color: var(--text); margin-bottom: 16px; line-height: 1.8; }
+  .pi-info .links-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .pi-info .links-row a {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+    background: var(--primary); color: white; transition: all 0.2s;
+  }
+  .pi-info .links-row a:hover { opacity: 0.85; transform: translateY(-1px); }
+  .pi-info .links-row a.outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+
+  /* Research */
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 24px; }
+  .research-card {
+    background: var(--white); border-radius: 10px; padding: 32px 28px;
+    box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s;
+  }
+  .research-card:hover { transform: translateY(-3px); }
+  .research-card .icon { font-size: 2rem; margin-bottom: 14px; }
+  .research-card h4 { font-size: 1.1rem; margin-bottom: 8px; color: var(--primary); }
+  .research-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
+
+  /* Members */
+  .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 28px; }
+  .member-card { text-align: center; }
+  .member-photo {
+    width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 14px;
+    background: var(--border); overflow: hidden; box-shadow: var(--shadow);
+  }
+  .member-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .member-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 2px; }
+  .member-card .role { font-size: 0.82rem; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+  .member-card p { font-size: 0.82rem; color: var(--text-light); }
+
+  /* Publications */
+  .pub-list { max-width: 850px; margin: 0 auto; }
+  .pub-item {
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.92rem; line-height: 1.6;
+  }
+  .pub-item .pub-title { font-weight: 600; color: var(--text); }
+  .pub-item .pub-authors { color: var(--text-light); font-size: 0.85rem; }
+  .pub-item .pub-journal { color: var(--accent); font-weight: 600; font-size: 0.85rem; }
+  .pub-item .pub-year { font-size: 0.8rem; color: #999; }
+
+  /* Contact */
+  .contact-grid { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+  .contact-item { text-align: center; min-width: 200px; }
+  .contact-item .icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .contact-item h4 { font-size: 0.9rem; color: var(--primary); margin-bottom: 4px; }
+  .contact-item p { font-size: 0.88rem; color: var(--text-light); }
+
+  /* Footer */
+  footer { text-align: center; padding: 32px 0; font-size: 0.82rem; color: #999; border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .pi-grid { flex-direction: column; align-items: center; }
+    nav .links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="container">
+    <a href="#" class="logo">Shi <span>Lab</span></a>
+    <ul class="links">
+      <li><a href="#pi">PI</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#members">Members</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <h1>Shi Laboratory</h1>
+    <p class="sub">Structural Biology of Gene Regulation</p>
+    <p class="inst">School of Life Sciences · Westlake University · 西湖大学生命科学学院</p>
+  </div>
+</header>
+
+<!-- PI -->
+<section id="pi">
+  <div class="container">
+    <h2 class="section-title">Principal Investigator</h2>
+    <p class="section-sub">实验室负责人</p>
+    <div class="pi-grid">
+      <div class="pi-photo">
+        <!-- Replace with PI photo -->
+        <img src="images/pi-photo.jpg.png" alt="Zhubing Shi" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#e0e0e0;color:#999;font-size:0.85rem>PI Photo</div>'">
+      </div>
+      <div class="pi-info">
+        <h3>Zhubing Shi · 史竹兵</h3>
+        <p class="title-zh">特聘研究员 · 博士生导师</p>
+        <p class="title-en">Principal Investigator, School of Life Sciences, Westlake University</p>
+        <p class="bio">
+          史竹兵博士，西湖大学生命科学学院特聘研究员、博士生导师。主要从事结构生物学研究，
+          运用冷冻电镜（cryo-EM）、X射线晶体学、生物化学及生物物理学方法，
+          研究基因转录调控和染色质三维组织中的关键大分子复合体的结构与功能。
+          研究工作聚焦于 cohesin、Mediator、转录因子等染色质相关蛋白复合体的组装机制及其在基因表达调控和
+          基因组三维折叠中的作用。
+        </p>
+        <div class="links-row">
+          <a href="mailto:shizhubing@westlake.edu.cn">📧 Email</a>
+          <a href="#" class="outline">📄 Google Scholar</a>
+          <a href="#" class="outline">🔬 ResearchGate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Research -->
+<section id="research">
+  <div class="container">
+    <h2 class="section-title">Research Interests</h2>
+    <p class="section-sub">研究方向</p>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="icon">🔬</div>
+        <h4>3D Genome Organization</h4>
+        <p>Structural and functional studies of cohesin, CTCF, and NIPBL-MAU2 complexes
+           in mediating chromatin loop extrusion and three-dimensional genome folding.</p>
+      </div>
+      <div class="research-card">
+        <div class="icon">🧬</div>
+        <h4>Transcription Regulation</h4>
+        <p>Cryo-EM studies of Mediator complex, CDK8 module, and their interactions
+           with transcription factors and the basal transcription machinery.</p>
+      </div>
+      <div class="research-card">
+        <div class="icon">💻</div>
+        <h4>Integrative Structural Biology</h4>
+        <p>Combining cryo-EM, X-ray crystallography, crosslinking mass spectrometry,
+           and computational modeling to study dynamic macromolecular assemblies.</p>
+      </div>
+      <div class="research-card">
+        <div class="icon">🧪</div>
+        <h4>Drug Discovery</h4>
+        <p>Structure-based drug design targeting chromatin-modifying complexes
+           and transcriptional regulators implicated in cancer and developmental diseases.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Members -->
+<section id="members">
+  <div class="container">
+    <h2 class="section-title">Lab Members</h2>
+    <p class="section-sub">实验室成员</p>
+      <div class="members-grid">
+      <!-- PI -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/pi-photo.jpg.png" alt="Zhubing Shi" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e0e0e0;color:#999;margin:0 auto'>Photo</div>'">
+        </div>
+        <h4>Zhubing Shi<br><small>史竹兵</small></h4>
+        <p class="role">Principal Investigator</p>
+        <p>Structural Biology · Cryo-EM</p>
+      </div>
+      <!-- Haosen Zhao -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/haosen-zhao.jpg" alt="Haosen Zhao" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e8e3da;color:#999;font-size:2rem;font-weight:700;margin:0 auto>HZ</div>'">
+        </div>
+        <h4>Haosen Zhao</h4>
+        <p class="role">Ph.D. Student</p>
+        <p>NIPBL-MAU2 · Cohesin · Mediator</p>
+      </div>
+      <!-- Xuelan Li -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/xuelan-li.jpg" alt="Xuelan Li" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#d5e8d4;color:#999;font-size:2rem;font-weight:700;margin:0 auto>XL</div>'">
+        </div>
+        <h4>Xuelan Li</h4>
+        <p class="role">Ph.D. Student</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Benyao Duan -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/benyao-duan.jpg" alt="Benyao Duan" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dae8fc;color:#999;font-size:2rem;font-weight:700;margin:0 auto>BD</div>'">
+        </div>
+        <h4>Benyao Duan</h4>
+        <p class="role">Research Assistant</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Haoran Wang -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/haoran-wang.jpg" alt="Haoran Wang" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#ffe6cc;color:#999;font-size:2rem;font-weight:700;margin:0 auto>HW</div>'">
+        </div>
+        <h4>Haoran Wang</h4>
+        <p class="role">Research Assistant</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Wei Huang -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/wei-huang.jpg" alt="Wei Huang" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e1d5e7;color:#999;font-size:2rem;font-weight:700;margin:0 auto>WH</div>'">
+        </div>
+        <h4>Wei Huang</h4>
+        <p class="role">Research Associate</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Jiaxuan Yang -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/jiaxuan-yang.jpg" alt="Jiaxuan Yang" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#f8cecc;color:#999;font-size:2rem;font-weight:700;margin:0 auto>JY</div>'">
+        </div>
+        <h4>Jiaxuan Yang</h4>
+        <p class="role">Ph.D. Student</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Jialu Li -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/jialu-li.jpg" alt="Jialu Li" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#d5e8d4;color:#999;font-size:2rem;font-weight:700;margin:0 auto>JL</div>'">
+        </div>
+        <h4>Jialu Li</h4>
+        <p class="role">Ph.D. Student</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Yuanshi -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/yuanshi.jpg" alt="Yuanshi" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dae8fc;color:#999;font-size:2rem;font-weight:700;margin:0 auto>YS</div>'">
+        </div>
+        <h4>Yuanshi</h4>
+        <p class="role">Ph.D. Student</p>
+        <p>Structural Biology</p>
+      </div>
+      <!-- Jingwei Liu -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="images/jingwei-liu.jpg" alt="Jingwei Liu" onerror="this.parentNode.innerHTML='<div style=width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#ffe6cc;color:#999;font-size:2rem;font-weight:700;margin:0 auto>JL</div>'">
+        </div>
+        <h4>Jingwei Liu</h4>
+        <p class="role">Ph.D. Student</p>
+        <p>Structural Biology</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Publications -->
+<section id="publications">
+  <div class="container">
+    <h2 class="section-title">Publications</h2>
+    <p class="section-sub">文章还在努力中，敬请期待</p>
+    <div class="pub-list">
+      <div class="pub-item" style="text-align:center; padding:50px 0; border:none;">
+        <p style="font-size:1.15rem; color:var(--text-light);">
+          🧪 Exciting work in progress — stay tuned!
+        </p>
+        <p style="font-size:0.95rem; color:#999; margin-top:10px;">
+          文章还在努力中，敬请期待！
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">联系方式</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="icon">📧</div>
+        <h4>Email</h4>
+        <p>shizhubing@westlake.edu.cn</p>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📍</div>
+        <h4>Address</h4>
+        <p>西湖大学云谷校区<br>生命科学学院<br>杭州市西湖区</p>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🌐</div>
+        <h4>Join Us</h4>
+        <p>欢迎博士后、博士生、科研助理加入！</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Shi Laboratory · School of Life Sciences · Westlake University</p>
+  </div>
+</footer>
+
+</body>
+</html>
